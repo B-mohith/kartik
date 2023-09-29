@@ -3,9 +3,9 @@ import tensorflow as tf
 
 print(tf.__version__)
 
-config = tf.ConfigProto()
-config.gpu_options.allow_growth = True
-tf.Session(config=config)
+gpus = tf.config.list_physical_devices('GPU')
+for gpu in gpus:
+    tf.config.experimental.set_memory_growth(gpu, True)
 
 from model.GCN.data_loader.data_utils import *
 from model.GCN.models.trainer import model_train
